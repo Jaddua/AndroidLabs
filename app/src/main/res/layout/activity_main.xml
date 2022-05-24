@@ -10,17 +10,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_message"
-        android:textSize="25dp"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:text="@string/lab2_top_message"
+        android:textSize="34sp"
+        android:textAlignment="center"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:orientation="horizontal">
+
 
     <Button
         android:id="@+id/button"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="@string/ButtonText"
-        android:layout_gravity="center"/>
+        android:layout_weight="0.5"
+        android:text="@string/Lab2_Button_Text" />
 
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_weight="0.5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Lab2_Checkbox_Text" />
+    </LinearLayout>
 </LinearLayout>
