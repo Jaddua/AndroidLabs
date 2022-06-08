@@ -5,4 +5,10 @@
     <string name="ButtonText">I\'m a button</string>
     <string name="Lab2_Button_Text">CLICK HERE</string>
     <string name="Lab2_Checkbox_Text">Check this out</string>
+    <string name="Lab2_Switch_Text">Switch on / off</string>
+    <string name="Lab2_Switch_Text_Toggle">The switch is now</string>
+    <string name="Lab2_Switch_On_Text">on</string>
+    <string name="Lab2_Switch_Off_Text">off</string>
+    <string name="Lab2_Edittext_Hint">Enter Name Here</string>
+    <string name="Lab2_Toast_Message">Here is more information</string>
 </resources>
