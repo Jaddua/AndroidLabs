@@ -6,7 +6,7 @@
     <string name="ButtonText">Je suis un bouton</string>
     <string name="Lab2_Button_Text">CLIQUEZ ICI</string>
     <string name="Lab2_Checkbox_Text">Regarde ça</string>
-    <string name="Lab2_Switch_Text">Interrupteur ferme / ouvre</string>
+    <string name="Lab2_Switch_Text">ferme / ouvre</string>
     <string name="Lab2_Switch_Text_Toggle">L\'interrupteur est maintenant</string>
     <string name="Lab2_Switch_On_Text">ferme</string>
     <string name="Lab2_Switch_Off_Text">ouvre</string>
