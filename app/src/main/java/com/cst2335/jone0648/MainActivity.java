@@ -1,41 +1,96 @@
 package com.cst2335.jone0648;
 
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.Toast;
+import android.widget.EditText;
 
-import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final static String TAG ="MAIN_ACTIVITY";
+    public static final String SHAREDPREFS = "sharedPrefs";
+    public static final String EMAIL = "userEmail";
+    private EditText email;
+    private Button login;
+    private String userEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //hello
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_constraint);
+        setContentView( R.layout.login_layout );
+
+       email = (EditText) findViewById(R.id.editTextEmail);
+
+       login = (Button) findViewById(R.id.login_button);
 
 
-
-
-        Button toastButton = findViewById(R.id.button);
-        toastButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.Lab2_Toast_Message), Toast.LENGTH_LONG).show();
+       login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                save();
+                Intent profile = new Intent(MainActivity.this, ProfileActivity.class);
+                profile.putExtra("EMAIL",email.getText().toString());
+                startActivity(profile);
             }
         });
-        Switch switch1 = findViewById(R.id.switch1);
-        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton cb, boolean b) {
-                Snackbar snackbar = Snackbar
-                        .make(findViewById(android.R.id.content), String.format("%s %s", getString(R.string.Lab2_Switch_Text_Toggle), b ? getString(R.string.Lab2_Switch_On_Text) : getString(R.string.Lab2_Switch_Off_Text)), Snackbar.LENGTH_LONG);
-                snackbar.setAction( "Undo", click -> cb.setChecked(!b));
-                snackbar.show();
-            }
-        });
+        load();
+        update();
+        Log.i(TAG, "In onCreate");
     }
+
+    public void save() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHAREDPREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(EMAIL, email.getText().toString());
+        editor.apply();
+    }
+
+    public void load() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHAREDPREFS, MODE_PRIVATE);
+        userEmail = sharedPreferences.getString(EMAIL, "");
+    }
+
+    public void update() {
+        email.setText(userEmail);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "In onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "In onResume");
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG, "In onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "In onDestroy");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "In onPause");
+        save();
+    }
+
 }

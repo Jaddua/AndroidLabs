@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Laboratoire Numéro 2</string>
+    <string name="app_name">Laboratoire Numéro 3</string>
     <string name="hello_message">Bonjour monde!</string>
     <string name="lab2_top_message">Laboratoire 2 IUG</string>
     <string name="ButtonText">Je suis un bouton</string>
@@ -12,4 +12,15 @@
     <string name="Lab2_Switch_Off_Text">ouvre</string>
     <string name="Lab2_Edittext_Hint">Entrez le nom ici</string>
     <string name="Lab2_Toast_Message">Voici plus d\'informations</string>
+    <string name="lab3_email_message">Entrez ton email</string>
+    <string name="lab3_email_hint">Ton email</string>
+    <string name="lab3_password_message">Entrez ton pass</string>
+    <string name="lab3_login_button_message">Connexion</string>
+    <string name="lab3_profile_message">Ton id</string>
+    <string name="lab3_profile_name_message">Ton nom</string>
+    <string name="lab3_profile_name_hint">Entrez ton nom</string>
+    <string name="lab3_profile_email_message">Ton email</string>
+    <string name="lab3_profile_email_hint">Entrez ton email</string>
+    <string name="lab3_profile_picture_message">Ton photo</string>
+    <string name="lab3_profile_picture_instruction">Cliquez le bouton pour un photo</string>
 </resources>

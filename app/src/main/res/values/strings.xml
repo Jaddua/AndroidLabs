@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lab 2</string>
+    <string name="app_name">Lab 3</string>
     <string name="hello_message">Hello World!</string>
     <string name="lab2_top_message">Lab 2 GUI</string>
     <string name="ButtonText">I\'m a button</string>
@@ -11,4 +11,17 @@
     <string name="Lab2_Switch_Off_Text">off</string>
     <string name="Lab2_Edittext_Hint">Enter Name Here</string>
     <string name="Lab2_Toast_Message">Here is more information</string>
+    <string name="lab3_email_message">Enter your email address:</string>
+    <string name="lab3_email_hint">Type email here</string>
+    <string name="lab3_password_message">Type your password:</string>
+    <string name="lab3_login_button_message">Login</string>
+    <string name="lab3_profile_message">Your profile</string>
+    <string name="lab3_profile_name_message">Your name:</string>
+    <string name="lab3_profile_name_hint">Enter your name</string>
+    <string name="lab3_profile_email_message">Your email:</string>
+    <string name="lab3_profile_email_hint">Enter your email</string>
+    <string name="lab3_profile_picture_message">Your picture:</string>
+    <string name="lab3_profile_picture_instruction">Click the button above to take a picture</string>
+
+
 </resources>
