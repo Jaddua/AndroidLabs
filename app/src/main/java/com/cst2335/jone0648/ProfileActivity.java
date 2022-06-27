@@ -13,6 +13,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
         email = findViewById(R.id.editTextProfileEmail);
         Intent main = getIntent();
         EMAIL = main.getStringExtra("EMAIL");
+
         imageView = findViewById(R.id.lab3_imageButton);
 
 
@@ -61,6 +64,11 @@ public class ProfileActivity extends AppCompatActivity {
                             else if(result.getResultCode() == Activity.RESULT_CANCELED)
                                 Log.i(TAG, "User refused to capture a picture.");
                         });
+        Button chatButton = findViewById(R.id.lab4_chat_button);
+        chatButton.setOnClickListener(v -> {
+            Intent chatRoom = new Intent(ProfileActivity.this, ChatRoomActivity.class);
+            startActivity(chatRoom);
+        });
         Log.e(TAG, "In onCreate");
     }
 

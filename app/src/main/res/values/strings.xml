@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lab 3</string>
+    <string name="app_name">Lab 4</string>
     <string name="hello_message">Hello World!</string>
     <string name="lab2_top_message">Lab 2 GUI</string>
     <string name="ButtonText">I\'m a button</string>
@@ -22,6 +22,12 @@
     <string name="lab3_profile_email_hint">Enter your email</string>
     <string name="lab3_profile_picture_message">Your picture:</string>
     <string name="lab3_profile_picture_instruction">Click the button above to take a picture</string>
-
+    <string name="lab4_chat_button_text">Go to chat</string>
+    <string name="lab4_chat_send">Send</string>
+    <string name="lab4_chat_receive">Receive</string>
+    <string name="lab4_chat_hint">Type here</string>
+    <string name="lab4_delete">Do you want to delete this:%nrow: %d , database id: %d ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>

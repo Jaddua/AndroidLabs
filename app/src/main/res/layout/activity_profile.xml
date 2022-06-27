@@ -53,4 +53,10 @@
         android:layout_height="wrap_content"
         android:text="@string/lab3_profile_picture_instruction" />
 
+    <Button
+        android:id="@+id/lab4_chat_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lab4_chat_button_text" />
+
 </LinearLayout>
