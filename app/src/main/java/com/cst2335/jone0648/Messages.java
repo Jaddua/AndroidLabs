@@ -1,10 +1,21 @@
 package com.cst2335.jone0648;
 public class Messages {
-    String msg;
+    String message;
     public  Boolean sr;
+    long id;
 
-    Messages(String msg, Boolean sr){
-        this.msg = msg;
+    Messages(String message, Boolean sr, long id){
+        this.message = message;
         this.sr = sr;
+        this.id = id;
+
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public long getId() {
+        return this.id;
     }
 }
