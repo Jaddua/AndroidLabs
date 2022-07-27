@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lab 5</string>
+    <string name="app_name">Lab 6</string>
     <string name="hello_message">Hello World!</string>
     <string name="lab2_top_message">Lab 2 GUI</string>
     <string name="ButtonText">I\'m a button</string>
@@ -29,5 +29,6 @@
     <string name="lab4_delete">Do you want to delete this:%nrow: %d , database id: %d ?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="lab6_weather_button_text">Go to the weather forecast</string>
 
 </resources>

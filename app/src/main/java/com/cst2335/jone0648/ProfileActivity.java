@@ -69,6 +69,17 @@ public class ProfileActivity extends AppCompatActivity {
             Intent chatRoom = new Intent(ProfileActivity.this, ChatRoomActivity.class);
             startActivity(chatRoom);
         });
+
+
+
+        //Lab 6 material...
+        Button weatherForecastLauncherButton = findViewById(R.id.lab6_weather_button);
+
+        weatherForecastLauncherButton.setOnClickListener(v -> {
+            Intent weatherForecast = new Intent(ProfileActivity.this, WeatherForecastActivity.class);
+            startActivity(weatherForecast);
+        });
+
         Log.e(TAG, "In onCreate");
     }
 
