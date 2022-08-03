@@ -5,7 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="27dp"
+    android:layout_marginBottom="27dp"
+    android:layout_marginLeft="48dp"
+    android:layout_marginRight="48dp"
+    >
 
     <TextView
         android:layout_width="match_parent"
@@ -22,7 +27,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:hint="@string/lab3_profile_name_hint"/>
+        android:hint="@string/lab3_profile_name_hint"
+        android:nextFocusDown="@id/item1"
+        android:nextFocusUp="@id/item2"
+        android:nextFocusRight="@id/item3"
+        android:nextFocusLeft="@id/item4"
+    />
 
     <TextView
         android:layout_width="match_parent"
@@ -35,7 +45,11 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:hint="@string/lab3_profile_email_hint"/>
+        android:hint="@string/lab3_profile_email_hint"
+        android:nextFocusDown="@id/item1"
+        android:nextFocusUp="@id/item2"
+        android:nextFocusRight="@id/item3"
+        android:nextFocusLeft="@id/item4"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -57,12 +71,20 @@
         android:id="@+id/lab4_chat_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lab4_chat_button_text" />
+        android:text="@string/lab4_chat_button_text"
+        android:nextFocusDown="@id/item1"
+        android:nextFocusUp="@id/item2"
+        android:nextFocusRight="@id/item3"
+        android:nextFocusLeft="@id/item4"/>
 
     <Button
         android:id="@+id/lab6_weather_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lab6_weather_button_text" />
+        android:text="@string/lab6_weather_button_text"
+        android:nextFocusDown="@id/item1"
+        android:nextFocusUp="@id/item2"
+        android:nextFocusRight="@id/item3"
+        android:nextFocusLeft="@id/item4"/>
 
 </LinearLayout>
