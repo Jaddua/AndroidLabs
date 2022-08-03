@@ -30,5 +30,14 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="lab6_weather_button_text">Go to the weather forecast</string>
+    <string name="lab6_current_location_text">Weather report for</string>
+    <string name="lab6_current_temp_text">Current Temp</string>
+    <string name="lab6_min_temp_text">Min Temp</string>
+    <string name="lab6_max_temp_text">Max Temp</string>
+    <string name="lab6_uv_rating_text">UV Rating</string>
+    <string name="lab7_message_detail_header">Message Here</string>
+    <string name="lab7_ID">ID=</string>
+    <string name="lab7_is_a_send_message">Is a Send Message?</string>
+    <string name="lab7_hide_button_text">Hide</string>
 
 </resources>

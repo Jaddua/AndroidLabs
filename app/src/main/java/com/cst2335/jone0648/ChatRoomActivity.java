@@ -4,6 +4,7 @@ package com.cst2335.jone0648;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -28,12 +29,18 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     MyListAdapter adapter;
 
+    static String SR = "SR";
+    static String ID = "ID";
+    static String MESSAGE = "MESSAGE";
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+
+        Boolean isTablet = (findViewById(R.id.lab7_frame_layout) != null);
 
         ListView listView = findViewById(R.id.lab4listview);
         listView.setAdapter(adapter = new MyListAdapter());
@@ -75,6 +82,26 @@ public class ChatRoomActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         });
 
+        listView.setOnItemClickListener( (list, view, position, id) -> {
+            Bundle passData = new Bundle();
+            String message = messages.get(position).getMessage();
+            passData.putString(MESSAGE, message);
+            passData.putBoolean(SR, messages.get(position).sr);
+            long Id = messages.get(position).getId();
+            passData.putLong(ID, Id);
+            if(isTablet) {
+                DetailsFragment detailsFragment = new DetailsFragment();
+                detailsFragment.setArguments(passData);
+                getSupportFragmentManager().beginTransaction().replace(R.id.lab7_frame_layout, detailsFragment).commit();
+            }
+            else {
+                Intent emptyActivity = new Intent(ChatRoomActivity.this, EmptyActivity.class);
+
+                startActivity(emptyActivity);
+            }
+
+        } );
+
         listView.setOnItemLongClickListener((p, b, index, id) -> {
             AlertDialog.Builder Builder = new AlertDialog.Builder(this);
             Builder.setTitle(String.format(getString(R.string.lab4_delete), index, id))
@@ -93,7 +120,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void deleteMessage(Messages m) {
         MyOpener myOpener = new MyOpener(this);
         SQLiteDatabase db = myOpener.getWritableDatabase();
-        db.delete(myOpener.TABLE_NAME, myOpener.COL1 + "= ?", new String[]{Long.toString(m.getId())});
+        db.delete(MyOpener.TABLE_NAME, MyOpener.COL1 + "= ?", new String[]{Long.toString(m.getId())});
     }
     public class MyListAdapter extends BaseAdapter {
 

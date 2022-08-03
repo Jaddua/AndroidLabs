@@ -31,5 +31,15 @@
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="lab6_weather_button_text">Allez aux prévisions météorologiques</string>
+    <string name="lab6_current_location_text">Location Maintenant</string>
+    <string name="lab6_current_temp_text">Temp Maintenant</string>
+    <string name="lab6_min_temp_text">Temp Trops Min</string>
+    <string name="lab6_max_temp_text">Temp Trops Max</string>
+    <string name="lab6_uv_rating_text">UV Indice</string>
+    <string name="lab7_message_detail_header">Message Ici</string>
+    <string name="lab7_ID">ID=</string>
+    <string name="lab7_is_a_send_message">Est Ce Que un Message Envoyer?</string>
+    <string name="lab7_hide_button_text">Visage Ne Pas</string>
+
 
 </resources>

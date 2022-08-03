@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.login_layout );
 
-       email = (EditText) findViewById(R.id.editTextEmail);
+       email = findViewById(R.id.editTextEmail);
 
-       login = (Button) findViewById(R.id.login_button);
+       login = findViewById(R.id.login_button);
 
 
        login.setOnClickListener(new View.OnClickListener() {

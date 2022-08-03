@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -54,14 +55,13 @@ public class ProfileActivity extends AppCompatActivity {
         );
 
         myPictureTakerLauncher =
-                registerForActivityResult( new ActivityResultContracts.StartActivityForResult()
+                registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
                         , result -> {
-                            if (result.getResultCode() == Activity.RESULT_OK)
-                            { Intent data = result.getData();
+                            if (result.getResultCode() == Activity.RESULT_OK) {
+                                Intent data = result.getData();
                                 Bitmap imgbitmap = (Bitmap) data.getExtras().get("data");
                                 imageView.setImageBitmap(imgbitmap); // the imageButton
-                            }
-                            else if(result.getResultCode() == Activity.RESULT_CANCELED)
+                            } else if (result.getResultCode() == Activity.RESULT_CANCELED)
                                 Log.i(TAG, "User refused to capture a picture.");
                         });
         Button chatButton = findViewById(R.id.lab4_chat_button);
@@ -71,8 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
-
-        //Lab 6 material...
         Button weatherForecastLauncherButton = findViewById(R.id.lab6_weather_button);
 
         weatherForecastLauncherButton.setOnClickListener(v -> {
@@ -80,12 +78,13 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(weatherForecast);
         });
 
+
         Log.e(TAG, "In onCreate");
     }
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            myPictureTakerLauncher.launch(takePictureIntent);
+        myPictureTakerLauncher.launch(takePictureIntent);
     }
 
     @Override

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailsFragment">
+
+    <RelativeLayout
+        android:id="@+id/lab7_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lab7_linear_layout"
+            android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:id="@+id/lab7_message_detail_header"
+        android:text="@string/lab7_message_detail_header" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lab7_ID"
+        android:id="@+id/lab7_ID"
+        android:layout_below="@id/lab7_message_detail_header"/>
+
+
+
+        <CheckBox
+            android:id="@+id/lab7_is_a_send_message_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lab7_is_a_send_message"
+            android:layout_below="@id/lab7_ID"/>
+
+        <Button
+            android:id="@+id/lab7_hide_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lab7_hide_button_text"
+            android:layout_below="@id/lab7_linear_layout"
+            />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</FrameLayout>

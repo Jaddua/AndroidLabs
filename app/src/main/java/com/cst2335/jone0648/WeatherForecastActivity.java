@@ -1,125 +1,236 @@
 package com.cst2335.jone0648;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.content.AsyncTaskLoader;
-
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Xml;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
+import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class WeatherForecastActivity extends AppCompatActivity {
 
+    protected static final String URL = "http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=7e943c97096a9784391a981c4d878b22&mode=xml&units=metric";
+    protected static final String URL_IMAGE = "http://openweathermap.org/img/w/";
+    protected static final String UV = "http://api.openweathermap.org/data/2.5/uvi?appid=7e943c97096a9784391a981c4d878b22&lat=45.348945&lon=-75.759389";
+    protected static final String ACTIVITY = "WeatherForecastActivity";
+    private ProgressBar progressBar;
+    private ImageView weatherImageView;
+    private TextView currentTempTextView, minTempTextView, maxTempTextView, currentLocationTextView, uvRatingTextView;
 
-    //TextView CurrentTemp = findViewById(R.id.Lab6CurrentTempDisplay);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_forecast);
 
-        ProgressBar progressBar = findViewById(R.id.lab6_progressBar);
+        currentLocationTextView = findViewById(R.id.currentLocationTextView);
+        weatherImageView = findViewById(R.id.currentWeatherImageView);
+        currentTempTextView = findViewById(R.id.currentTempTextView);
+        minTempTextView = findViewById(R.id.minTempTextView);
+        maxTempTextView = findViewById(R.id.maxTempTextView);
+        uvRatingTextView = findViewById(R.id.uvRatingTextView);
+        progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
+        progressBar.setMax(100);
 
-        ForecastQuery req = new ForecastQuery();
-        req.execute("http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=7e943c97096a9784391a981c4d878b22&mode=xml&units=metric");
+        new ForecastQuery().execute(null, null, null);
 
-       // req.doInBackground("http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=7e943c97096a9784391a981c4d878b22&mode=xml&units=metric");
-        //TextView CurrentTemp = findViewById(R.id.Lab6CurrentTempDisplay);
-        //currentTemp.append(String.format(" %s °C", req.currentTemp));
+
     }
+
+
     private class ForecastQuery extends AsyncTask<String, Integer, String> {
-        String currentTemp;
-        String maxTemp;
-        String minTemp;
-        String UVRating;
-        String iconName;
-        Bitmap weatherImage;
 
 
-        protected String doInBackground(String ... args)
-        {
+        private String currentTemp = null;
+        private String minTemp = null;
+        private String maxTemp = null;
+        private String uvRating = null;
+        private String iconFileName = null;
+        private Bitmap weatherBitmap = null;
+        private String currentLocation = null;
 
+        static private final String TAG = "ForecastQuery";
+
+        protected String doInBackground(String... args) {
+
+            InputStream inputStream = null;
 
             try {
-                //create a URL object of what server to contact:
-                URL url = new URL(args[0]);
-                //open the connection
+
+                URL url = new URL(URL);
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                inputStream = conn.getInputStream();
+
+
+                XmlPullParser parser = Xml.newPullParser();
+                parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+                parser.setInput(inputStream, null);
+
+                int eventType = parser.getEventType();
+                boolean set = false;
+
+                while (eventType != XmlPullParser.END_DOCUMENT) {
+                    if (eventType == XmlPullParser.START_TAG) {
+                        if (parser.getName().equalsIgnoreCase("current")) {
+                            set = true;
+                        } else if (parser.getName().equalsIgnoreCase("city") && set) {
+                            currentLocation = parser.getAttributeValue(null, "name");
+                        } else if (parser.getName().equalsIgnoreCase("temperature") && set) {
+                            currentTemp = parser.getAttributeValue(null, "value");
+                            publishProgress(25);
+                            minTemp = parser.getAttributeValue(null, "min");
+                            publishProgress(50);
+                            maxTemp = parser.getAttributeValue(null, "max");
+                            publishProgress(75);
+
+                        } else if (parser.getName().equalsIgnoreCase("weather") && set) {
+                            iconFileName = parser.getAttributeValue(null, "icon") + ".png";
+                            File file = getBaseContext().getFileStreamPath(iconFileName);
+                            if (!file.exists()) {
+                                saveImage(iconFileName);
+                            } else {
+                                Log.i(ACTIVITY, "Saved icon, " + iconFileName + " is displayed.");
+                                try {
+                                    FileInputStream in = new FileInputStream(file);
+                                    weatherBitmap = BitmapFactory.decodeStream(in);
+                                } catch (FileNotFoundException e) {
+                                    e.printStackTrace();
+                                    Log.i(ACTIVITY, "Saved icon, " + iconFileName + " is not found.");
+                                }
+                            }
+                            publishProgress(100);
+
+                        }
+                    } else if (eventType == XmlPullParser.END_TAG) {
+                        if (parser.getName().equalsIgnoreCase("current"))
+                            set = false;
+                    }
+                    eventType = parser.next();
+                }
+
+            } catch (IOException e) {
+                Log.i(ACTIVITY, "IOException: " + e.getMessage());
+            } catch (XmlPullParserException e) {
+                Log.i(ACTIVITY, "XmlPullParserException: " + e.getMessage());
+            }
+            try {
+
+
+                URL url = new URL(UV);
+
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                //wait for data:
+
+
                 InputStream response = urlConnection.getInputStream();
 
 
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response, StandardCharsets.UTF_8), 8);
+                StringBuilder sb = new StringBuilder();
 
-                //From part 3: slide 19
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(false);
-                XmlPullParser xpp = factory.newPullParser();
-                xpp.setInput( response  , "UTF-8");
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                String result = sb.toString();
 
 
+                JSONObject uvReport = new JSONObject(result);
 
-                //From part 3, slide 20
-                String parameter = null;
 
-                int eventType = xpp.getEventType(); //The parser is currently at START_DOCUMENT
+                uvRating = uvReport.getString("value");
 
-                while(eventType != XmlPullParser.END_DOCUMENT)
-                {
+                publishProgress(25);
+                Thread.sleep(1000);
+                publishProgress(50);
+                Log.i(TAG, "Num of entries: " + uvRating);
 
-                    if(eventType == XmlPullParser.START_TAG)
-                    {
-                        //If you get here, then you are pointing at a start tag
-                        if(xpp.getName().equals("temperature"))
-                        {
-                            //If you get here, then you are pointing to a <Weather> start tag
-                            currentTemp = xpp.getAttributeValue(null,    "value");
-                            publishProgress(25, 50, 75);
-                           Log.i("Current Temperature   ", currentTemp);
-                            // CurrentTemp.setText("Current Temperature: " + currentTemp);
-                            minTemp = xpp.getAttributeValue(null, "min");
-                            publishProgress(25, 50, 75);
-                            maxTemp = xpp.getAttributeValue(null, "max");
-                            publishProgress(25, 50, 75);
-                        }
+            } catch (Exception e) {
 
-                        else if(xpp.getName().equals("weather"))
-                        {
-                            iconName = xpp.getAttributeValue(null, "icon");
-                            publishProgress(25, 50, 75);
-                            Log.e("Icon Name", iconName);
-                        }/*
-                        else if(xpp.getName().equals("Weather"))
-                        {
-                            parameter = xpp.getAttributeValue(null, "outlook"); //this will run for <Weather outlook="parameter"
-                            parameter = xpp.getAttributeValue(null, "windy"); //this will run for <Weather windy="paramter"  >
-                        }
-                        else if(xpp.getName().equals("Temperature"))
-                        {
-                            xpp.next(); //move the pointer from the opening tag to the TEXT event
-                            parameter = xpp.getText(); // this will return  20
-                        }*/
+            } finally {
+                if (inputStream != null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        Log.i(ACTIVITY, "IOException: " + e.getMessage());
                     }
-                    eventType = xpp.next(); //move to the next xml event and store it in a variable
+                }
+                return null;
+            }
+
+        }
+
+
+        @Override
+        public void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            progressBar.setProgress(values[0]);
+            if (values[0] == 100) {
+
+            }
+        }
+
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            currentLocationTextView.setText(getString(R.string.lab6_current_location_text) + String.format(" %s", currentLocation));
+            currentTempTextView.setText(getString(R.string.lab6_current_temp_text) + String.format(" %.1f", Double.parseDouble(currentTemp)) + "\u00b0");
+            minTempTextView.setText(getString(R.string.lab6_min_temp_text) + String.format(" %.1f", Double.parseDouble(minTemp)) + "\u00b0");
+            maxTempTextView.setText(getString(R.string.lab6_max_temp_text) + String.format(" %.1f", Double.parseDouble(maxTemp)) + "\u00b0");
+            uvRatingTextView.setText(getString(R.string.lab6_uv_rating_text) + String.format(" %s", uvRating));
+            weatherImageView.setImageBitmap(weatherBitmap);
+            progressBar.setVisibility(View.INVISIBLE);
+        }
+
+        private void saveImage(String fname) {
+            HttpURLConnection connection = null;
+            try {
+                URL url = new URL(URL_IMAGE + fname);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                int responseCode = connection.getResponseCode();
+                if (responseCode == 200) {
+                    weatherBitmap = BitmapFactory.decodeStream(connection.getInputStream());
+                    FileOutputStream outputStream = openFileOutput(fname, Context.MODE_PRIVATE);
+                    weatherBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                    outputStream.flush();
+                    outputStream.close();
+                    Log.i(ACTIVITY, "Weather icon, " + fname + " is downloaded and displayed.");
+                } else
+                    Log.i(ACTIVITY, "Can't connect to the weather icon for downloading.");
+            } catch (Exception e) {
+                Log.i(ACTIVITY, "weather icon download error: " + e.getMessage());
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
                 }
 
-
             }
-            catch (Exception e)
-            {
-            }
-
-
-            return "Done";
         }
     }
 }
