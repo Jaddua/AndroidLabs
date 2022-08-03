@@ -1,68 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ProfileActivity"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lab3_profile_message" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lab3_profile_name_message" />
+        android:layout_height="match_parent"
+        tools:context=".ProfileActivity"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editTextProfileName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="@string/lab3_profile_name_hint"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lab3_profile_message" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lab3_profile_email_message" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lab3_profile_name_message" />
 
-    <EditText
-        android:id="@+id/editTextProfileEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:hint="@string/lab3_profile_email_hint"/>
+        <EditText
+            android:id="@+id/editTextProfileName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/lab3_profile_name_hint" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lab3_profile_picture_message" />
-    <ImageButton
-        android:id="@+id/lab3_imageButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="fill"
-        android:src="@android:drawable/picture_frame" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lab3_profile_email_message" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lab3_profile_picture_instruction" />
+        <EditText
+            android:id="@+id/editTextProfileEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/lab3_profile_email_hint" />
 
-    <Button
-        android:id="@+id/lab4_chat_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lab4_chat_button_text" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lab3_profile_picture_message" />
 
-    <Button
-        android:id="@+id/lab6_weather_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lab6_weather_button_text" />
+        <ImageButton
+            android:id="@+id/lab3_imageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="fill"
+            android:src="@android:drawable/picture_frame" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lab3_profile_picture_instruction" />
+
+        <Button
+            android:id="@+id/lab4_chat_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lab4_chat_button_text" />
+
+        <Button
+            android:id="@+id/lab6_weather_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lab6_weather_button_text" />
+
+    </LinearLayout>
+</ScrollView>
